@@ -4,47 +4,47 @@
       "file": "/storage/emulated/0/AndroidIDEProjects/SmoothVideoApp/.gitignore",
       "selection": {
         "end": {
-          "column": 0,
-          "index": 0,
-          "line": 0
+          "column": 13,
+          "index": 1455,
+          "line": 85
         },
         "start": {
-          "column": 0,
-          "index": 0,
-          "line": 0
+          "column": 13,
+          "index": 1455,
+          "line": 85
         }
       }
     },
     {
-      "file": "/storage/emulated/0/AndroidIDEProjects/SmoothVideoApp/LICENSE",
+      "file": "/storage/emulated/0/AndroidIDEProjects/SmoothVideoApp/app/src/main/java/com/eikarna/smoothvideoapp/MainActivity.java",
       "selection": {
         "end": {
-          "column": 9,
-          "index": 1070,
-          "line": 20
+          "column": 3,
+          "index": 8570,
+          "line": 208
         },
         "start": {
-          "column": 9,
-          "index": 1070,
-          "line": 20
+          "column": 3,
+          "index": 8570,
+          "line": 208
         }
       }
     },
     {
-      "file": "/storage/emulated/0/AndroidIDEProjects/SmoothVideoApp/README.md",
+      "file": "/storage/emulated/0/AndroidIDEProjects/SmoothVideoApp/.github/workflows/android.yml",
       "selection": {
         "end": {
-          "column": 12,
-          "index": 426,
-          "line": 22
+          "column": 35,
+          "index": 657,
+          "line": 30
         },
         "start": {
-          "column": 12,
-          "index": 426,
-          "line": 22
+          "column": 35,
+          "index": 657,
+          "line": 30
         }
       }
     }
   ],
-  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/SmoothVideoApp/README.md"
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/SmoothVideoApp/.github/workflows/android.yml"
 }

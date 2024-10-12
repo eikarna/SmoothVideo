@@ -209,24 +209,6 @@ public class MainActivity extends AppCompatActivity {
   }
 
   @Override
-  public void onRequestPermissionsResult(
-      int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-    if (requestCode == 1) {
-      if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-        // Permission granted, proceed with your file access
-        Toast.makeText(this, "Restart app for take effects.", Toast.LENGTH_LONG).show();
-      } else {
-        // Permission denied, show a message to the user
-        Toast.makeText(
-                this,
-                "It's okay, if you change your mind, change it in the application settings :D",
-                Toast.LENGTH_LONG)
-            .show();
-      }
-    }
-  }
-
-  @Override
   protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     if (requestCode == REQUEST_VIDEO && resultCode == RESULT_OK && data != null) {
