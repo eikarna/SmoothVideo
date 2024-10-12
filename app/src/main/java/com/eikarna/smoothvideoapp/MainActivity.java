@@ -3,6 +3,7 @@ package com.eikarna.smoothvideoapp;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.util.Log;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -53,6 +54,14 @@ public class MainActivity extends AppCompatActivity {
           this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
     }
 
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+      if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS)
+          != PackageManager.PERMISSION_GRANTED) {
+        ActivityCompat.requestPermissions(
+            this, new String[] {android.Manifest.permission.POST_NOTIFICATIONS}, 1);
+      }
+    }
+
     // Initialize SharedPreferences
     sharedPreferences = getSharedPreferences("SettingsPrefs", MODE_PRIVATE);
 
@@ -61,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
     MaterialButton startProcessingButton = findViewById(R.id.startProcessingButton);
     startProcessingButton.setOnClickListener(v -> startFilterWorker());
-    
+
     MaterialButton settingsButton = findViewById(R.id.settingsButton);
     settingsButton.setOnClickListener(v -> showSettingsDialog());
   }
@@ -106,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             this, R.array.mc_mode_options, android.R.layout.simple_spinner_item);
     mcModeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     mcModeSpinner.setAdapter(mcModeAdapter);
-    
+
     ArrayAdapter<CharSequence> meAdapter =
         ArrayAdapter.createFromResource(
             this, R.array.me_options, android.R.layout.simple_spinner_item);
@@ -120,7 +129,16 @@ public class MainActivity extends AppCompatActivity {
     meModeSpinner.setAdapter(meModeAdapter);
 
     // Load values from SharedPreferences
-    loadSettings(fpsSeekBar, hwAccelSpinner, presetsSpinner, miModeSpinner, mcModeSpinner, meSpinner, meModeSpinner, customFilters, customParams);
+    loadSettings(
+        fpsSeekBar,
+        hwAccelSpinner,
+        presetsSpinner,
+        miModeSpinner,
+        mcModeSpinner,
+        meSpinner,
+        meModeSpinner,
+        customFilters,
+        customParams);
 
     // Build and show the dialog
     builder
@@ -130,7 +148,15 @@ public class MainActivity extends AppCompatActivity {
             "Save",
             (dialog, id) ->
                 saveSettings(
-                    fpsSeekBar, hwAccelSpinner, presetsSpinner, miModeSpinner, mcModeSpinner, meSpinner, meModeSpinner, customFilters, customParams))
+                    fpsSeekBar,
+                    hwAccelSpinner,
+                    presetsSpinner,
+                    miModeSpinner,
+                    mcModeSpinner,
+                    meSpinner,
+                    meModeSpinner,
+                    customFilters,
+                    customParams))
         .setNegativeButton("Cancel", (dialog, id) -> dialog.cancel());
     builder.create().show();
   }
@@ -219,7 +245,8 @@ public class MainActivity extends AppCompatActivity {
   private void startFilterWorker() {
     if (videoUri != null) {
       // Copy the video to internal storage
-      String inputFilePath = FileUtil.copyFileToPath(this, videoUri, getFilesDir().toString(), "input.mp4");
+      String inputFilePath =
+          FileUtil.copyFileToPath(this, videoUri, getFilesDir().toString(), "input.mp4");
       String outputFilePath = getFilesDir() + "/output.mp4";
 
       if (inputFilePath != null) {
@@ -253,17 +280,14 @@ public class MainActivity extends AppCompatActivity {
                 .putString(
                     "me",
                     getResources()
-                        .getStringArray(R.array.me_options)[
-                        sharedPreferences.getInt("me", 0)])
+                        .getStringArray(R.array.me_options)[sharedPreferences.getInt("me", 0)])
                 .putString(
                     "me_mode",
                     getResources()
                         .getStringArray(R.array.me_mode_options)[
                         sharedPreferences.getInt("me_mode", 0)])
-                .putString(
-                    "customFilters", sharedPreferences.getString("customFilters", ""))
-                .putString(
-                    "customParams", sharedPreferences.getString("customParams", ""))
+                .putString("customFilters", sharedPreferences.getString("customFilters", ""))
+                .putString("customParams", sharedPreferences.getString("customParams", ""))
                 .build();
 
         OneTimeWorkRequest filterWork =

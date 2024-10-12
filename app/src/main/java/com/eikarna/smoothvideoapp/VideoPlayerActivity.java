@@ -9,8 +9,9 @@ import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.material.button.MaterialButton;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class VideoPlayerActivity extends AppCompatActivity {
     private ExoPlayer player;
@@ -43,10 +44,10 @@ public class VideoPlayerActivity extends AppCompatActivity {
       saveVideo.setOnClickListener(v -> saveVideo());
     }
     
-    public void saveVideo() {
-      DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMdd");
-      LocalDateTime now = LocalDateTime.now();
-      FileUtil.copyFileToPath(this, videoUri, getExternalFilesDir(null).toString(), "SmoothVideo-"+now);
+    private void saveVideo() {
+      SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
+      String formattedDate = dateFormatter.format(new Date());
+      FileUtil.copyFileToPath(this, videoUri, getExternalFilesDir(null).toString(), "SmoothVideo-"+formattedDate);
     }
 
     @Override
