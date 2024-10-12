@@ -2,12 +2,14 @@ package com.eikarna.smoothvideoapp;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.work.Data;
@@ -22,7 +24,6 @@ import android.content.Intent;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import java.io.IOException;
 import androidx.annotation.NonNull;
 import android.widget.Toast;
@@ -33,6 +34,9 @@ import android.widget.SeekBar;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.view.LayoutInflater;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.AdapterView;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 
 import com.eikarna.smoothvideoapp.util.FileUtil;
 
@@ -47,20 +51,6 @@ public class MainActivity extends AppCompatActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
-
-    if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-        != PackageManager.PERMISSION_GRANTED) {
-      ActivityCompat.requestPermissions(
-          this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-    }
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-      if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS)
-          != PackageManager.PERMISSION_GRANTED) {
-        ActivityCompat.requestPermissions(
-            this, new String[] {android.Manifest.permission.POST_NOTIFICATIONS}, 1);
-      }
-    }
 
     // Initialize SharedPreferences
     sharedPreferences = getSharedPreferences("SettingsPrefs", MODE_PRIVATE);
@@ -81,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     View dialogView = inflater.inflate(R.layout.activity_settings, null);
 
     // Get all UI elements (SeekBar and Spinners)
+    TextView fpsText = dialogView.findViewById(R.id.fpsText);
     SeekBar fpsSeekBar = dialogView.findViewById(R.id.fps);
     Spinner hwAccelSpinner = dialogView.findViewById(R.id.hwaccel);
     Spinner presetsSpinner = dialogView.findViewById(R.id.presets);
@@ -127,6 +118,53 @@ public class MainActivity extends AppCompatActivity {
             this, R.array.me_mode_options, android.R.layout.simple_spinner_item);
     meModeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     meModeSpinner.setAdapter(meModeAdapter);
+
+    // Listen FPS SeekBar change
+    fpsSeekBar.setOnSeekBarChangeListener(
+        new OnSeekBarChangeListener() {
+          @Override
+          public void onProgressChanged(SeekBar seekbar, int progress, boolean fromUser) {
+            fpsText.setText(fpsText.getText().toString() + " (" + progress + ")");
+          }
+
+          @Override
+          public void onStartTrackingTouch(SeekBar seekbar) {
+            // Notify when user start tracking
+          }
+
+          @Override
+          public void onStopTrackingTouch(SeekBar seekbar) {
+            // Notify When User Stop Tracking
+          }
+        });
+
+    // Listen MiMode item change
+    miModeSpinner.setOnItemSelectedListener(
+        new OnItemSelectedListener() {
+          @Override
+          public void onItemSelected(
+              AdapterView<?> parentView, View selectedItemView, int position, long id) {
+              switch(getResources().getStringArray(R.array.mi_mode_options)[position]) {
+                case "mci": {
+                  mcModeSpinner.setVisibility(1);
+                  meSpinner.setVisibility(1);
+                  meModeSpinner.setVisibility(1);
+                  break;
+                }
+                default: {
+                  mcModeSpinner.setVisibility(0);
+                  meSpinner.setVisibility(0);
+                  meModeSpinner.setVisibility(0);
+                  break;
+                }
+              }
+          }
+
+          @Override
+          public void onNothingSelected(AdapterView<?> parentView) {
+              // miModeSpinner.setSelection(0);
+          }
+        });
 
     // Load values from SharedPreferences
     loadSettings(
@@ -220,7 +258,7 @@ public class MainActivity extends AppCompatActivity {
     wakeLock =
         powerManager.newWakeLock(
             PowerManager.PARTIAL_WAKE_LOCK, "SmoothVideoApp::VideoProcessingLock");
-    wakeLock.acquire();
+    wakeLock.acquire(60);
   }
 
   private void releaseWakeLock() {

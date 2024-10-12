@@ -19,6 +19,7 @@
              android:layout_height="wrap_content"
              android:layout_width="0dp"
              android:layout_weight="1"
+             android:id="@+id/fpsText"
              android:text="@string/settings_fps" />
 
         <SeekBar
@@ -179,7 +180,7 @@
         <com.google.android.material.textfield.TextInputEditText
              android:layout_height="wrap_content"
              android:layout_width="match_parent"
-             android:hint=":filter1=test:filter2"
+             android:hint=":filter1=test:filter2=test2"
              android:id="@+id/customFilters" />
 
     </LinearLayout>
