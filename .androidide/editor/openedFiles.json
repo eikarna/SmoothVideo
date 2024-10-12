@@ -1,0 +1,50 @@
+{
+  "allFiles": [
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/SmoothVideoApp/.gitignore",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        },
+        "start": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/SmoothVideoApp/LICENSE",
+      "selection": {
+        "end": {
+          "column": 9,
+          "index": 1070,
+          "line": 20
+        },
+        "start": {
+          "column": 9,
+          "index": 1070,
+          "line": 20
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/SmoothVideoApp/README.md",
+      "selection": {
+        "end": {
+          "column": 12,
+          "index": 426,
+          "line": 22
+        },
+        "start": {
+          "column": 12,
+          "index": 426,
+          "line": 22
+        }
+      }
+    }
+  ],
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/SmoothVideoApp/README.md"
+}

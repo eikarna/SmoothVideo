@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Smooth Video App</string>
+    <string name="select_button">Select Video</string>
+    <string name="start_process">Start Processing</string>
+    <!-- Settings Section -->
+    <string name="settings">Settings</string>
+    <string name="settings_fps">Frame per Second</string>
+    <string name="settings_hw_accel">HW Acceleration</string>
+    <string name="settings_presets">Presets</string>
+    <string name="settings_mi_mode">Motion Interpolation Mode</string>
+    <string name="settings_mc_mode">Motion Compensation</string>
+    <string name="settings_me">Motion Estimation</string>
+    <string name="settings_me_mode">Motion Estimation Mode</string>
+    <string name="settings_custom_filters">Custom Filters</string>
+    <string name="settings_custom_parameters">Custom Parameters</string>
+    <!-- Video Player Section -->
+    <string name="vp_show_info">Show Info</string>
+    <string name="vp_save_video">Save Video</string>
+    <!-- Hardware Acceleration Options -->
+    <string-array name="hwaccel_options">
+        <item>mediacodec</item>
+        <!-- Add other options as needed -->
+    </string-array>
+
+    <!-- Presets Options -->
+    <string-array name="presets_options">
+        <item>veryfast</item>
+        <item>fast</item>
+        <item>medium</item>
+        <item>slow</item>
+        <item>veryslow</item>
+        <!-- Add other options as needed -->
+    </string-array>
+
+    <!-- mi_mode Options -->
+    <string-array name="mi_mode_options">
+        <item>dup</item>
+        <item>blend</item>
+        <item>mci</item>
+    </string-array>
+
+    <!-- mc_mode Options -->
+    <string-array name="mc_mode_options">
+        <item>obmc</item>
+        <item>aobmc</item>
+    </string-array>
+  
+    <!-- ME (Motion Estimation) Options -->
+    <string-array name="me_options">
+        <item>esa</item>
+        <item>tss</item>
+        <item>tdls</item>
+        <item>ntss</item>
+        <item>fss</item>
+        <item>ds</item>
+        <item>hexbs</item>
+        <item>epzs</item>
+        <item>umh</item>
+    </string-array>
+  
+    <!-- me_mode (Motion Estimation Mode) Options -->
+    <string-array name="me_mode_options">
+        <item>bidir</item>
+        <item>bilat</item>
+    </string-array>
+</resources>

@@ -1,0 +1,51 @@
+
+plugins {
+    id 'com.android.application'
+    
+}
+
+android {
+    namespace 'com.eikarna.smoothvideoapp'
+    compileSdk 34
+    
+    defaultConfig {
+        applicationId "com.eikarna.smoothvideoapp"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+        
+        vectorDrawables { 
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    buildFeatures {
+        viewBinding true
+        
+    }
+    
+}
+
+dependencies {
+    implementation('com.google.android.material:material:1.9.0')
+    implementation('com.google.android.exoplayer:exoplayer:2.17.0')
+    implementation('com.arthenica:ffmpeg-kit-full:4.5.LTS')
+    implementation('androidx.work:work-runtime-ktx:2.7.1')
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    // Common functionality used across multiple media libraries
+    // implementation("androidx.media3:media3-common:1.3.1")
+}
