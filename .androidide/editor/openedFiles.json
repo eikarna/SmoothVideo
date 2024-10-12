@@ -34,14 +34,14 @@
       "file": "/storage/emulated/0/AndroidIDEProjects/SmoothVideoApp/.github/workflows/android.yml",
       "selection": {
         "end": {
-          "column": 35,
-          "index": 657,
-          "line": 30
+          "column": 26,
+          "index": 535,
+          "line": 26
         },
         "start": {
-          "column": 35,
-          "index": 657,
-          "line": 30
+          "column": 26,
+          "index": 535,
+          "line": 26
         }
       }
     },
@@ -89,7 +89,82 @@
           "line": 49
         }
       }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/SmoothVideoApp/app/build.gradle",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        },
+        "start": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/SmoothVideoApp/build.gradle",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        },
+        "start": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/SmoothVideoApp/gradle.properties",
+      "selection": {
+        "end": {
+          "column": 24,
+          "index": 1000,
+          "line": 16
+        },
+        "start": {
+          "column": 24,
+          "index": 1000,
+          "line": 16
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/SmoothVideoApp/settings.gradle",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        },
+        "start": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        }
+      }
+    },
+    {
+      "file": "/storage/emulated/0/AndroidIDEProjects/SmoothVideoApp/gradle/wrapper/gradle-wrapper.properties",
+      "selection": {
+        "end": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        },
+        "start": {
+          "column": 0,
+          "index": 0,
+          "line": 0
+        }
+      }
     }
   ],
-  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/SmoothVideoApp/app/src/main/java/com/eikarna/smoothvideoapp/VideoPlayerActivity.java"
+  "selectedFile": "/storage/emulated/0/AndroidIDEProjects/SmoothVideoApp/.github/workflows/android.yml"
 }
