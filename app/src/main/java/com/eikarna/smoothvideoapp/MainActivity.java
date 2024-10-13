@@ -236,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
         wakeLock =
                 powerManager.newWakeLock(
                         PowerManager.PARTIAL_WAKE_LOCK, "SmoothVideoApp::VideoProcessingLock");
-        wakeLock.acquire(60);
+        wakeLock.acquire();
     }
 
     private void releaseWakeLock() {
