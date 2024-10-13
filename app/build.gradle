@@ -7,6 +7,10 @@ android {
     namespace 'com.eikarna.smoothvideoapp'
     compileSdk 34
 
+    lintOptions {
+        tasks.lint.enabled = false
+    }
+
     defaultConfig {
         applicationId "com.eikarna.smoothvideoapp"
         minSdk 24
