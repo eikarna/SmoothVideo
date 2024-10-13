@@ -4,7 +4,11 @@
     <string name="app_name">Smooth Video App</string>
     <string name="select_button">Select Video</string>
     <string name="start_process">Start Processing</string>
-  
+    <string name="processing_video">Processing Video</string>
+    <string-array name="processing_messages">
+        <item>Please wait while we apply the filter…</item>
+    </string-array>
+
     <!-- Settings Section -->
     <string name="settings">Settings</string>
     <string name="settings_fps">Frame per Second</string>
@@ -16,11 +20,11 @@
     <string name="settings_me_mode">Motion Estimation Mode</string>
     <string name="settings_custom_filters">Custom Filters</string>
     <string name="settings_custom_parameters">Custom Parameters</string>
-  
+
     <!-- Video Player Section -->
     <string name="vp_show_info">Show Info</string>
     <string name="vp_save_video">Save Video</string>
-  
+
     <!-- Hardware Acceleration Options -->
     <string-array name="hwaccel_options">
         <item>auto</item>
@@ -53,7 +57,7 @@
         <item>obmc</item>
         <item>aobmc</item>
     </string-array>
-  
+
     <!-- ME (Motion Estimation) Options -->
     <string-array name="me_options">
         <item>esa</item>
@@ -66,7 +70,7 @@
         <item>epzs</item>
         <item>umh</item>
     </string-array>
-  
+
     <!-- me_mode (Motion Estimation Mode) Options -->
     <string-array name="me_mode_options">
         <item>bidir</item>

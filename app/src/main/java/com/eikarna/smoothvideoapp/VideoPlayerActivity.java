@@ -1,13 +1,18 @@
 package com.eikarna.smoothvideoapp;
 
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.media3.common.MediaItem;
+import androidx.media3.exoplayer.ExoPlayer;
+import androidx.media3.ui.PlayerView;
+
 import com.eikarna.smoothvideoapp.util.FileUtil;
-import com.google.android.exoplayer2.ExoPlayer;
-import com.google.android.exoplayer2.ui.PlayerView;
-import com.google.android.exoplayer2.MediaItem;
-import com.google.android.material.button.MaterialButton;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,7 +20,6 @@ import java.util.Locale;
 
 public class VideoPlayerActivity extends AppCompatActivity {
     private ExoPlayer player;
-    private PlayerView playerView;
     private Uri videoUri;
 
     @Override
@@ -23,7 +27,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_player);
 
-        playerView = findViewById(R.id.videoPlayerView);
+        PlayerView playerView = findViewById(R.id.videoPlayerView);
         player = new ExoPlayer.Builder(this).build();
         playerView.setPlayer(player);
 
@@ -35,19 +39,23 @@ public class VideoPlayerActivity extends AppCompatActivity {
         }
         setupListener();
     }
-  
+
     private void setupListener() {
-      MaterialButton showInfo = findViewById(R.id.show_info);
-      MaterialButton saveVideo = findViewById(R.id.save_video);
-    
-      showInfo.setOnClickListener(null);
-      saveVideo.setOnClickListener(v -> saveVideo());
+        Button showInfo = findViewById(R.id.show_info);
+        Button saveVideo = findViewById(R.id.save_video);
+
+        showInfo.setOnClickListener(v -> Toast.makeText(this, "Coming Soon!", Toast.LENGTH_LONG).show());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            saveVideo.setOnClickListener(v -> saveVideo());
+        }
     }
-    
+
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     private void saveVideo() {
-      SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
-      String formattedDate = dateFormatter.format(new Date());
-      FileUtil.copyFileToPath(this, videoUri, getExternalFilesDir(null).toString(), "SmoothVideo-"+formattedDate);
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
+        String formattedDate = dateFormatter.format(new Date());
+        String outputFileStr = "SmoothVideo-" + formattedDate + ".mp4";
+        FileUtil.saveFileToPath(this, videoUri, outputFileStr);
     }
 
     @Override

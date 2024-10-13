@@ -1,206 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-     xmlns:android="http://schemas.android.com/apk/res/android"
-     android:layout_height="match_parent"
-     android:layout_width="match_parent"
-     android:paddingRight="20dp"
-     android:orientation="vertical"
-     android:paddingLeft="20dp"
-     android:paddingTop="20dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="20dp"
+    android:paddingTop="20dp"
+    android:paddingRight="20dp">
 
     <LinearLayout
-         android:layout_height="wrap_content"
-         android:layout_width="match_parent"
-         android:weightSum="2"
-         android:layout_marginBottom="11dp"
-         android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
 
         <com.google.android.material.textview.MaterialTextView
-             android:layout_height="wrap_content"
-             android:layout_width="0dp"
-             android:layout_weight="1"
-             android:id="@+id/fpsText"
-             android:text="@string/settings_fps" />
+            android:id="@+id/fpsText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/settings_fps" />
 
         <SeekBar
-             android:layout_height="wrap_content"
-             android:layout_width="0dp"
-             android:max="165"
-             android:layout_weight="1"
-             android:id="@+id/fps" />
+            android:id="@+id/fps"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:max="165" />
 
     </LinearLayout>
 
     <LinearLayout
-         android:layout_height="wrap_content"
-         android:layout_width="match_parent"
-         android:weightSum="2"
-         android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
 
         <com.google.android.material.textview.MaterialTextView
-             android:layout_height="wrap_content"
-             android:layout_width="0dp"
-             android:layout_weight="1"
-             android:text="@string/settings_hw_accel" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/settings_hw_accel" />
 
         <com.google.android.material.textview.MaterialTextView
-             android:layout_height="wrap_content"
-             android:layout_width="0dp"
-             android:layout_weight="1"
-             android:text="@string/settings_presets" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/settings_presets" />
 
     </LinearLayout>
 
     <LinearLayout
-         android:layout_height="wrap_content"
-         android:layout_width="match_parent"
-         android:weightSum="2"
-         android:layout_marginBottom="11dp"
-         android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
 
         <Spinner
-             android:layout_height="wrap_content"
-             android:layout_width="0dp"
-             android:layout_weight="1"
-             android:id="@+id/hwaccel">
+            android:id="@+id/hwaccel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
         </Spinner>
 
         <Spinner
-             android:layout_height="wrap_content"
-             android:layout_width="0dp"
-             android:layout_weight="1"
-             android:id="@+id/presets">
-
-        </Spinner>
-
-    </LinearLayout>
-
-    <LinearLayout
-         android:layout_height="wrap_content"
-         android:layout_width="match_parent"
-         android:weightSum="2"
-         android:orientation="horizontal">
-
-        <com.google.android.material.textview.MaterialTextView
-             android:layout_height="wrap_content"
-             android:layout_width="0dp"
-             android:layout_weight="1"
-             android:text="@string/settings_mi_mode" />
-
-        <com.google.android.material.textview.MaterialTextView
-             android:layout_height="wrap_content"
-             android:layout_width="0dp"
-             android:layout_weight="1"
-             android:text="@string/settings_mc_mode" />
-
-    </LinearLayout>
-
-    <LinearLayout
-         android:layout_height="wrap_content"
-         android:layout_width="match_parent"
-         android:layout_marginBottom="11dp"
-         android:orientation="horizontal">
-
-        <Spinner
-             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             android:layout_weight="1"
-             android:id="@+id/mi_mode">
-
-        </Spinner>
-
-        <Spinner
-             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             android:layout_weight="1"
-             android:id="@+id/mc_mode">
+            android:id="@+id/presets"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
         </Spinner>
 
     </LinearLayout>
 
     <LinearLayout
-         android:layout_height="wrap_content"
-         android:layout_width="match_parent"
-         android:weightSum="2"
-         android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
 
         <com.google.android.material.textview.MaterialTextView
-             android:layout_height="wrap_content"
-             android:layout_width="0dp"
-             android:layout_weight="1"
-             android:text="@string/settings_me" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/settings_mi_mode" />
 
         <com.google.android.material.textview.MaterialTextView
-             android:layout_height="wrap_content"
-             android:layout_width="0dp"
-             android:layout_weight="1"
-             android:text="@string/settings_me_mode" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/settings_mc_mode" />
 
     </LinearLayout>
 
     <LinearLayout
-         android:layout_height="wrap_content"
-         android:layout_width="match_parent"
-         android:weightSum="2"
-         android:layout_marginBottom="11dp"
-         android:orientation="horizontal">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:orientation="horizontal">
 
         <Spinner
-             android:layout_height="wrap_content"
-             android:layout_width="0dp"
-             android:layout_weight="1"
-             android:id="@+id/me">
+            android:id="@+id/mi_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
         </Spinner>
 
         <Spinner
-             android:layout_height="wrap_content"
-             android:layout_width="0dp"
-             android:layout_weight="1"
-             android:id="@+id/me_mode">
+            android:id="@+id/mc_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
         </Spinner>
 
     </LinearLayout>
 
     <LinearLayout
-         android:layout_height="wrap_content"
-         android:layout_width="match_parent"
-         android:layout_marginBottom="11dp"
-         android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
 
         <com.google.android.material.textview.MaterialTextView
-             android:layout_height="wrap_content"
-             android:layout_width="match_parent"
-             android:gravity="center"
-             android:text="@string/settings_custom_filters" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/settings_me" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/settings_me_mode" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <Spinner
+            android:id="@+id/me"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+        </Spinner>
+
+        <Spinner
+            android:id="@+id/me_mode"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+        </Spinner>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:orientation="vertical">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/settings_custom_filters" />
 
         <com.google.android.material.textfield.TextInputEditText
-             android:layout_height="wrap_content"
-             android:layout_width="match_parent"
-             android:hint=":filter1=test:filter2=test2"
-             android:id="@+id/customFilters" />
+            android:id="@+id/customFilters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint=":filter1=test:filter2=test2" />
 
     </LinearLayout>
 
     <LinearLayout
-         android:layout_height="wrap_content"
-         android:layout_width="match_parent"
-         android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <com.google.android.material.textview.MaterialTextView
-             android:layout_height="wrap_content"
-             android:layout_width="match_parent"
-             android:gravity="center"
-             android:text="@string/settings_custom_parameters" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/settings_custom_parameters" />
 
         <com.google.android.material.textfield.TextInputEditText
-             android:layout_height="wrap_content"
-             android:layout_width="match_parent"
-             android:hint="-params1 1 -params2 2"
-             android:id="@+id/customParams" />
+            android:id="@+id/customParams"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="-params1 1 -params2 2" />
 
     </LinearLayout>
 

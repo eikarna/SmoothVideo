@@ -1,68 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-     xmlns:android="http://schemas.android.com/apk/res/android"
-     xmlns:app="http://schemas.android.com/apk/res-auto"
-     android:layout_height="match_parent"
-     android:layout_width="match_parent"
-     android:padding="16dp">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
     <LinearLayout
-         android:layout_height="match_parent"
-         android:layout_width="match_parent"
-         android:gravity="center"
-         android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
 
         <LinearLayout
-             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             android:layout_marginBottom="11dp"
-             android:gravity="center"
-             android:orientation="vertical">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="11dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <ImageView
-                 android:layout_height="100dp"
-                 android:layout_width="100dp"
-                 android:layout_marginBottom="11dp"
-                 android:src="@drawable/ic_launcher"
-                 android:id="@+id/appIcon" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginBottom="11dp"
+                android:src="@drawable/ic_launcher"
+                app:shapeAppearanceOverlay="@style/SpecificCornerRounded" />
 
             <TextView
-                 android:layout_height="wrap_content"
-                 android:layout_width="wrap_content"
-                 android:textAppearance="?android:attr/textAppearanceLarge"
-                 android:textSize="15dp"
-                 android:id="@+id/subHeaderText"
-                 android:text="@string/app_name" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
         <LinearLayout
-             android:layout_height="wrap_content"
-             android:layout_width="wrap_content"
-             android:gravity="center"
-             android:orientation="vertical">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <com.google.android.material.button.MaterialButton
-                 android:layout_height="wrap_content"
-                 android:layout_width="match_parent"
-                 android:id="@+id/selectVideoButton"
-                 android:text="@string/select_button" />
+            <Button
+                android:id="@+id/selectVideoButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawable="@style/Widget.Material3.Button"
+                android:text="@string/select_button" />
 
-            <com.google.android.material.button.MaterialButton
-                 android:layout_height="wrap_content"
-                 android:layout_width="match_parent"
-                 android:clickable="false"
-                 android:id="@+id/startProcessingButton"
-                 android:text="@string/start_process" />
+            <Button
+                android:id="@+id/startProcessingButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:drawable="@style/Widget.Material3.Button"
+                android:text="@string/start_process" />
 
-            <com.google.android.material.button.MaterialButton
-                 android:layout_height="wrap_content"
-                 android:layout_width="match_parent"
-                 android:id="@+id/settingsButton"
-                 android:text="@string/settings" />
+            <Button
+                android:id="@+id/settingsButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawable="@style/Widget.Material3.Button"
+                android:text="@string/settings" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

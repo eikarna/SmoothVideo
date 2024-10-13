@@ -2,15 +2,18 @@ package com.eikarna.smoothvideoapp;
 
 import android.content.Context;
 import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.work.Data;
-import androidx.work.ForegroundInfo;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
+
 import com.arthenica.ffmpegkit.FFmpegKit;
+import com.arthenica.ffmpegkit.FFmpegKitConfig;
 import com.arthenica.ffmpegkit.FFmpegSession;
 
 import java.io.File;
+import java.util.Objects;
 
 public class FilterWorker extends Worker {
     private static final String TAG = "FilterWorker";
@@ -43,6 +46,7 @@ public class FilterWorker extends Worker {
         // Ensure output directory exists
         File outputFile = new File(outputFilePath);
         File outputDir = outputFile.getParentFile();
+        assert outputDir != null;
         if (!outputDir.exists() && !outputDir.mkdirs()) {
             Log.e(TAG, "Failed to create output directory.");
             return Result.failure();
@@ -54,13 +58,13 @@ public class FilterWorker extends Worker {
                 .append(inputFilePath)
                 .append(" -preset ").append(preset)
                 .append(" -filter:v \"minterpolate='mi_mode=").append(miMode);
-                if (meMode == "mci") {
-                    ffmpegCommand.append(":mc_mode=").append(mcMode)
+        if (Objects.equals(meMode, "mci")) {
+            ffmpegCommand.append(":mc_mode=").append(mcMode)
                     .append(":me=").append(me)
                     .append(":me_mode=").append(meMode)
                     .append(":mb_size=4");
-                }
-                ffmpegCommand.append(":fps=").append(fps)
+        }
+        ffmpegCommand.append(":fps=").append(fps)
                 .append(customFilters).append("'\" ").append(customParams)
                 .append(" -r ").append(fps).append(" ").append(outputFilePath);
 
@@ -69,6 +73,15 @@ public class FilterWorker extends Worker {
 
         // Optionally, set foreground service with a progress notification
         // setForegroundAsync(createForegroundInfo());
+
+        // Enable real-time log callbacks for FFmpegKit
+        FFmpegKitConfig.enableLogCallback(log -> {
+            // Update progress in real-time
+            String prettyMessage = formatLogMessage(log.getMessage());
+            setProgressAsync(
+                    new Data.Builder().putString("progressMessage", prettyMessage).build()
+            );
+        });
 
         // Execute the FFmpeg command
         FFmpegSession session = FFmpegKit.execute(ffmpegCommand.toString());
@@ -83,5 +96,31 @@ public class FilterWorker extends Worker {
             Log.e(TAG, "FFmpeg process failed");
             return Result.failure();
         }
+    }
+
+    // Function to format the log message
+    private String formatLogMessage(String message) {
+        if (message == null || message.trim().isEmpty()) {
+            return "";
+        }
+
+        // Example: Strip timestamps and irrelevant tags (like "[Parsed_...@...]")
+        message = message.replaceAll("\\[.*?]", "");  // Removes content within square brackets
+
+        // Format by log level
+        if (message.contains("error")) {
+            message = "❌ [ERROR] " + message;
+        } else if (message.contains("warning")) {
+            message = "⚠️ [WARNING] " + message;
+        } else {
+            message = "ℹ️ [INFO] " + message;
+        }
+
+        // Split long messages into lines for better readability
+        if (message.length() > 100) {
+            message = message.replaceAll("(.{100})", "$1\n"); // Insert newline after every 100 characters
+        }
+
+        return message.trim();
     }
 }
