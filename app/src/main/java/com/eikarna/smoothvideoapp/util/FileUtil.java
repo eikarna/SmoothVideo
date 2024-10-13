@@ -42,7 +42,7 @@ public class FileUtil {
         }
     }
 
-    public static void saveFileToPath(Context ctx, Uri uri, String fileName) {
+    public static boolean saveFileToPath(Context ctx, Uri uri, String fileName) {
         File dir = Environment.getExternalStorageDirectory();
         File saveDir = new File(dir, "Movies/SmoothVideo");
         if (!saveDir.exists()) {
@@ -60,7 +60,8 @@ public class FileUtil {
         } catch (IOException e) {
             // Handle error
             e.printStackTrace();
+            return false;
         }
-        Toast.makeText(ctx, "File saved successfully at Movies/SmoothVideo/" + fileName, Toast.LENGTH_LONG).show();
+        return true;
     }
 }

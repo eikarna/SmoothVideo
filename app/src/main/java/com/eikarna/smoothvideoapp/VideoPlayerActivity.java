@@ -52,10 +52,13 @@ public class VideoPlayerActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.Q)
     private void saveVideo() {
+        Toast.makeText(this, getResources().getString(R.string.saving_file), Toast.LENGTH_SHORT).show();
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault());
         String formattedDate = dateFormatter.format(new Date());
         String outputFileStr = "SmoothVideo-" + formattedDate + ".mp4";
-        FileUtil.saveFileToPath(this, videoUri, outputFileStr);
+        if (FileUtil.saveFileToPath(this, videoUri, outputFileStr)) {
+          Toast.makeText(this,  getResources().getString(R.string.success_save) + "Movies/SmoothVideo/" + outputFileStr, Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

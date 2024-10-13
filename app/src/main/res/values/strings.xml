@@ -8,9 +8,13 @@
     <string-array name="processing_messages">
         <item>Please wait while we apply the filter…</item>
     </string-array>
+    <string name="process_failed_copy">Failed to copy video to internal storage.</string>
 
     <!-- Settings Section -->
     <string name="settings">Settings</string>
+    <string name="settings_title">FFmpeg Settings</string>
+    <string name="settings_save">Save</string>
+    <string name="settings_cancel">Cancel</string>
     <string name="settings_fps">Frame per Second</string>
     <string name="settings_hw_accel">HW Acceleration</string>
     <string name="settings_presets">Presets</string>
@@ -24,6 +28,8 @@
     <!-- Video Player Section -->
     <string name="vp_show_info">Show Info</string>
     <string name="vp_save_video">Save Video</string>
+    <string name="saving_file">Please wait..</string>
+    <string name="success_save">Video successfully saved at</string>
 
     <!-- Hardware Acceleration Options -->
     <string-array name="hwaccel_options">
