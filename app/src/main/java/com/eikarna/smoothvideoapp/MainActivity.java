@@ -1,7 +1,7 @@
 package com.eikarna.smoothvideoapp;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -27,20 +27,27 @@ import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
+import com.eikarna.smoothvideoapp.databinding.ActivityMainBinding;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import com.eikarna.smoothvideoapp.util.FileUtil;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_VIDEO = 1;
     private Uri videoUri;
+    private MaterialAlertDialogBuilder progressDialogBuilder;
     private AlertDialog progressDialog;
     private PowerManager.WakeLock wakeLock;
     private SharedPreferences sharedPreferences;
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+        setContentView(view);
 
         // Initialize SharedPreferences
         sharedPreferences = getSharedPreferences("SettingsPrefs", MODE_PRIVATE);
@@ -56,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showSettingsDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.activity_settings, null);
 
@@ -115,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void onProgressChanged(SeekBar seekbar, int progress, boolean fromUser) {
-                        fpsText.setText(R.string.settings_fps + " (" + progress + ")");
+                        fpsText.setText(getResources().getString(R.string.settings_fps) + " (" + progress + ")");
                     }
 
                     @Override
@@ -166,10 +173,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Build and show the dialog
         builder
-                .setTitle("FFmpeg Settings")
+                .setTitle(R.string.settings_title)
                 .setView(dialogView)
                 .setPositiveButton(
-                        "Save",
+                        getResources().getString(R.string.settings_save),
                         (dialog, id) ->
                                 saveSettings(
                                         fpsSeekBar,
@@ -181,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
                                         meModeSpinner,
                                         customFilters,
                                         customParams))
-                .setNegativeButton("Cancel", (dialog, id) -> dialog.cancel());
+                .setNegativeButton(getResources().getString(R.string.settings_cancel), (dialog, id) -> dialog.cancel());
         builder.create().show();
     }
 
@@ -322,19 +329,21 @@ public class MainActivity extends AppCompatActivity {
                 acquireWakeLock();
                 // Show progress dialog
                 String wait = getResources().getStringArray(R.array.processing_messages)[0];
-                progressDialog =
-                        new AlertDialog.Builder(this)
+                progressDialogBuilder =
+                        new MaterialAlertDialogBuilder(this)
                                 .setTitle(R.string.processing_video)
                                 .setMessage(wait)
                                 .setCancelable(false)
                                 .setPositiveButton(
-                                        "Cancel",
+                                        getResources().getString(R.string.settings_cancel),
                                         (dialog, which) -> {
                                             WorkManager.getInstance(MainActivity.this).cancelWorkById(filterWork.getId());
                                             progressDialog.dismiss();
                                             releaseWakeLock();
-                                        })
-                                .show();
+                                        });
+        
+                progressDialog = progressDialogBuilder.create();
+                progressDialog.show();
 
                 WorkManager.getInstance(this).enqueue(filterWork);
 
@@ -369,16 +378,17 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 });
             } else {
-                showErrorDialog("Failed to copy video to internal storage.");
+                showErrorDialog(getResources().getString(R.string.process_failed_copy));
             }
         }
     }
 
     private void showErrorDialog(String message) {
-        new AlertDialog.Builder(this)
+        new MaterialAlertDialogBuilder(this)
                 .setTitle("Error")
                 .setMessage(message)
                 .setPositiveButton(android.R.string.ok, null)
+                .create()
                 .show();
     }
 }
