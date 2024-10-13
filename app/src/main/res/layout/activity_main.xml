@@ -6,6 +6,7 @@
     android:padding="16dp">
 
     <LinearLayout
+        android:id="@+id/body_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
@@ -64,6 +65,19 @@
 
         </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/body_main"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/version" />
     </LinearLayout>
 
 </RelativeLayout>
