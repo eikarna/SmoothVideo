@@ -3,7 +3,6 @@ package com.eikarna.smoothvideoapp.util;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Environment;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -10,7 +10,7 @@ android {
     lintOptions {
         tasks.lint.enabled = false
     }
-    
+
     defaultConfig {
         applicationId "com.eikarna.smoothvideoapp"
         minSdk 24
