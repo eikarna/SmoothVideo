@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void onProgressChanged(SeekBar seekbar, int progress, boolean fromUser) {
-                        fpsText.setText(fpsText.getText().toString() + " (" + progress + ")");
+                        fpsText.setText(R.string.settings_fps + " (" + progress + ")");
                     }
 
                     @Override
