@@ -252,15 +252,8 @@ public class MainActivity extends AppCompatActivity {
         wakeLock =
                 powerManager.newWakeLock(
                         PowerManager.PARTIAL_WAKE_LOCK, "SmoothVideoApp::VideoProcessingLock");
-<<<<<<< Updated upstream
-        wakeLock.acquire(60);
-=======
         wakeLock.acquire();
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     }
 
     private void releaseWakeLock() {
