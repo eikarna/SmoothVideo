@@ -5,10 +5,9 @@
     <string name="select_button">Select Video</string>
     <string name="start_process">Start Processing</string>
     <string name="processing_video">Processing Video</string>
-    <string-array name="processing_messages">
-        <item>Please wait while we apply the filter…</item>
-    </string-array>
+    <string name="processing_messages">Please wait while we apply the filter…</string>
     <string name="process_failed_copy">Failed to copy video to internal storage.</string>
+    <string name="version">SmoothVideo v1.0</string>
 
     <!-- Settings Section -->
     <string name="settings">Settings</string>

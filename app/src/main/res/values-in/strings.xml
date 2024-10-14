@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Smooth Video App</string>
+    <string name="select_button">Pilih Video</string>
+    <string name="start_process">Mulai</string>
+    <string name="processing_video">Memproses Video</string>
+    <string name="processing_messages">Mohon tunggu… Proses ini bergantung pada spesifikasi Perangkat-mu.</string>
+    <string name="process_failed_copy">Gagal menyalin video ke penyimpanan internal.</string>
+    <string name="settings">Setelan</string>
+    <string name="settings_title">Setelan FFmpeg</string>
+    <string name="settings_save">Simpan</string>
+    <string name="settings_cancel">Batal</string>
+    <string name="settings_fps">Frame per Second</string>
+    <string name="settings_hw_accel">Akselerasi HW</string>
+    <string name="settings_presets">Preset</string>
+    <string name="settings_mi_mode">Mode Interpolasi Gerakan</string>
+    <string name="settings_mc_mode">Kompensasi Gerakan</string>
+    <string name="settings_me">Estimasi Gerakan</string>
+    <string name="settings_me_mode">Mode Estimasi Gerakan</string>
+    <string name="settings_custom_filters">Filter Kustom</string>
+    <string name="settings_custom_parameters">Parameter Kustom</string>
+    <string name="vp_show_info">Tunjukkan Informasi Video</string>
+    <string name="vp_save_video">Simpan Video</string>
+    <string name="saving_file">Mohon tunggu..</string>
+    <string name="success_save">Video berhasil disimpan di</string>
+    <string name="version">SmoothVideo v1.0</string>
+</resources>

@@ -1,7 +1,6 @@
 package com.eikarna.smoothvideoapp;
 
 import android.annotation.SuppressLint;
-import androidx.appcompat.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -9,29 +8,28 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;
 
 import com.eikarna.smoothvideoapp.databinding.ActivityMainBinding;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-
+import com.eikarna.smoothvideoapp.databinding.ActivitySettingsBinding;
 import com.eikarna.smoothvideoapp.util.FileUtil;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_VIDEO = 1;
@@ -41,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private PowerManager.WakeLock wakeLock;
     private SharedPreferences sharedPreferences;
     private ActivityMainBinding binding;
+    private ActivitySettingsBinding settingsBinding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,77 +52,60 @@ public class MainActivity extends AppCompatActivity {
         // Initialize SharedPreferences
         sharedPreferences = getSharedPreferences("SettingsPrefs", MODE_PRIVATE);
 
-        Button selectVideoButton = findViewById(R.id.selectVideoButton);
-        selectVideoButton.setOnClickListener(v -> selectVideo());
-
-        Button startProcessingButton = findViewById(R.id.startProcessingButton);
-        startProcessingButton.setOnClickListener(v -> startFilterWorker());
-
-        Button settingsButton = findViewById(R.id.settingsButton);
-        settingsButton.setOnClickListener(v -> showSettingsDialog());
+        binding.selectVideoButton.setOnClickListener(v -> selectVideo());
+        binding.startProcessingButton.setOnClickListener(v -> startFilterWorker());
+        binding.settingsButton.setOnClickListener(v -> showSettingsDialog());
     }
 
     private void showSettingsDialog() {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this);
-        LayoutInflater inflater = this.getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.activity_settings, null);
-
-        // Get all UI elements (SeekBar and Spinners)
-        TextView fpsText = dialogView.findViewById(R.id.fpsText);
-        SeekBar fpsSeekBar = dialogView.findViewById(R.id.fps);
-        Spinner hwAccelSpinner = dialogView.findViewById(R.id.hwaccel);
-        Spinner presetsSpinner = dialogView.findViewById(R.id.presets);
-        Spinner miModeSpinner = dialogView.findViewById(R.id.mi_mode);
-        Spinner mcModeSpinner = dialogView.findViewById(R.id.mc_mode);
-        Spinner meSpinner = dialogView.findViewById(R.id.me);
-        Spinner meModeSpinner = dialogView.findViewById(R.id.me_mode);
-        EditText customFilters = dialogView.findViewById(R.id.customFilters);
-        EditText customParams = dialogView.findViewById(R.id.customParams);
+        settingsBinding = ActivitySettingsBinding.inflate(this.getLayoutInflater());
+        View dialogView = settingsBinding.getRoot();
 
         // Load spinner data from strings.xml
         ArrayAdapter<CharSequence> hwAccelAdapter =
                 ArrayAdapter.createFromResource(
                         this, R.array.hwaccel_options, android.R.layout.simple_spinner_item);
         hwAccelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        hwAccelSpinner.setAdapter(hwAccelAdapter);
+        settingsBinding.hwaccel.setAdapter(hwAccelAdapter);
 
         ArrayAdapter<CharSequence> presetsAdapter =
                 ArrayAdapter.createFromResource(
                         this, R.array.presets_options, android.R.layout.simple_spinner_item);
         presetsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        presetsSpinner.setAdapter(presetsAdapter);
+        settingsBinding.presets.setAdapter(presetsAdapter);
 
         ArrayAdapter<CharSequence> miModeAdapter =
                 ArrayAdapter.createFromResource(
                         this, R.array.mi_mode_options, android.R.layout.simple_spinner_item);
         miModeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        miModeSpinner.setAdapter(miModeAdapter);
+        settingsBinding.miMode.setAdapter(miModeAdapter);
 
         ArrayAdapter<CharSequence> mcModeAdapter =
                 ArrayAdapter.createFromResource(
                         this, R.array.mc_mode_options, android.R.layout.simple_spinner_item);
         mcModeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mcModeSpinner.setAdapter(mcModeAdapter);
+        settingsBinding.mcMode.setAdapter(mcModeAdapter);
 
         ArrayAdapter<CharSequence> meAdapter =
                 ArrayAdapter.createFromResource(
                         this, R.array.me_options, android.R.layout.simple_spinner_item);
         meAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        meSpinner.setAdapter(meAdapter);
+        settingsBinding.me.setAdapter(meAdapter);
 
         ArrayAdapter<CharSequence> meModeAdapter =
                 ArrayAdapter.createFromResource(
                         this, R.array.me_mode_options, android.R.layout.simple_spinner_item);
         meModeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        meModeSpinner.setAdapter(meModeAdapter);
+        settingsBinding.meMode.setAdapter(meModeAdapter);
 
         // Listen FPS SeekBar change
-        fpsSeekBar.setOnSeekBarChangeListener(
+        settingsBinding.fps.setOnSeekBarChangeListener(
                 new OnSeekBarChangeListener() {
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void onProgressChanged(SeekBar seekbar, int progress, boolean fromUser) {
-                        fpsText.setText(getResources().getString(R.string.settings_fps) + " (" + progress + ")");
+                        settingsBinding.fpsText.setText(getResources().getString(R.string.settings_fps) + " (" + progress + ")");
                     }
 
                     @Override
@@ -134,23 +116,26 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onStopTrackingTouch(SeekBar seekbar) {
                         // Notify When User Stop Tracking
+                        if (seekbar.getProgress() > 60) {
+                            Toast.makeText(settingsBinding.getRoot().getContext(), "Higher FPS will take more longer time!", Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
 
         // Listen MiMode item change
-        miModeSpinner.setOnItemSelectedListener(
+        settingsBinding.miMode.setOnItemSelectedListener(
                 new OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(
                             AdapterView<?> parentView, View selectedItemView, int position, long id) {
                         if (getResources().getStringArray(R.array.mi_mode_options)[position].equals("mci")) {
-                            mcModeSpinner.setVisibility(View.VISIBLE);
-                            meSpinner.setVisibility(View.VISIBLE);
-                            meModeSpinner.setVisibility(View.VISIBLE);
+                            settingsBinding.mcMode.setVisibility(View.VISIBLE);
+                            settingsBinding.me.setVisibility(View.VISIBLE);
+                            settingsBinding.meMode.setVisibility(View.VISIBLE);
                         } else {
-                            mcModeSpinner.setVisibility(View.INVISIBLE);
-                            meSpinner.setVisibility(View.INVISIBLE);
-                            meModeSpinner.setVisibility(View.INVISIBLE);
+                            settingsBinding.mcMode.setVisibility(View.INVISIBLE);
+                            settingsBinding.me.setVisibility(View.INVISIBLE);
+                            settingsBinding.meMode.setVisibility(View.INVISIBLE);
                         }
                     }
 
@@ -162,15 +147,15 @@ public class MainActivity extends AppCompatActivity {
 
         // Load values from SharedPreferences
         loadSettings(
-                fpsSeekBar,
-                hwAccelSpinner,
-                presetsSpinner,
-                miModeSpinner,
-                mcModeSpinner,
-                meSpinner,
-                meModeSpinner,
-                customFilters,
-                customParams);
+                settingsBinding.fps,
+                settingsBinding.hwaccel,
+                settingsBinding.presets,
+                settingsBinding.miMode,
+                settingsBinding.mcMode,
+                settingsBinding.me,
+                settingsBinding.meMode,
+                settingsBinding.customFilters,
+                settingsBinding.customParams);
 
         // Build and show the dialog
         builder
@@ -180,15 +165,15 @@ public class MainActivity extends AppCompatActivity {
                         getResources().getString(R.string.settings_save),
                         (dialog, id) ->
                                 saveSettings(
-                                        fpsSeekBar,
-                                        hwAccelSpinner,
-                                        presetsSpinner,
-                                        miModeSpinner,
-                                        mcModeSpinner,
-                                        meSpinner,
-                                        meModeSpinner,
-                                        customFilters,
-                                        customParams))
+                                        settingsBinding.fps,
+                                        settingsBinding.hwaccel,
+                                        settingsBinding.presets,
+                                        settingsBinding.miMode,
+                                        settingsBinding.mcMode,
+                                        settingsBinding.me,
+                                        settingsBinding.meMode,
+                                        settingsBinding.customFilters,
+                                        settingsBinding.customParams))
                 .setNegativeButton(getResources().getString(R.string.settings_cancel), (dialog, id) -> dialog.cancel());
         builder.create().show();
     }
@@ -331,7 +316,7 @@ public class MainActivity extends AppCompatActivity {
 
                 acquireWakeLock();
                 // Show progress dialog
-                String wait = getResources().getStringArray(R.array.processing_messages)[0];
+                String wait = getResources().getString(R.string.processing_messages);
                 progressDialogBuilder =
                         new MaterialAlertDialogBuilder(this)
                                 .setTitle(R.string.processing_video)
@@ -344,7 +329,7 @@ public class MainActivity extends AppCompatActivity {
                                             progressDialog.dismiss();
                                             releaseWakeLock();
                                         });
-        
+
                 progressDialog = progressDialogBuilder.create();
                 progressDialog.show();
 
