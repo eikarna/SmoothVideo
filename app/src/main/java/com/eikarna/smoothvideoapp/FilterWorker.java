@@ -59,7 +59,7 @@ public class FilterWorker extends Worker {
                 .append(inputFilePath)
                 .append(" -preset ").append(preset)
                 .append(" -filter:v \"minterpolate='mi_mode=").append(miMode);
-        if (Objects.equals(meMode, "mci")) {
+        if (Objects.equals(miMode, "mci")) {
             ffmpegCommand.append(":mc_mode=").append(mcMode)
                     .append(":me=").append(me)
                     .append(":me_mode=").append(meMode)
