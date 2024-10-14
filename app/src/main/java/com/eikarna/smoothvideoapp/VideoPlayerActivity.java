@@ -49,6 +49,12 @@ public class VideoPlayerActivity extends AppCompatActivity {
         }
         setupListener();
     }
+  
+    // Method to convert bits to megabytes
+    public static double bitsToMegabytes(long bits) {
+        // 1 MB = 8,388,608 bits
+        return bits / 8388608.0;
+    }
 
     private void setupListener() {
         binding.showInfo.setOnClickListener(v -> showVideoInfo());
@@ -83,7 +89,7 @@ public class VideoPlayerActivity extends AppCompatActivity {
         MaterialAlertDialogBuilder dialog = new MaterialAlertDialogBuilder(this)
                 .setTitle("FFprobe Output")
                 .setMessage(session.getOutput())
-                .setPositiveButton("COPY", (dialogInterface, i) -> {
+                .setPositiveButton(getResources().getString(android.R.string.copy), (dialogInterface, i) -> {
                     ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                     ClipData clip = ClipData.newPlainText("FFprobe Output", session.getOutput());
                     clipboard.setPrimaryClip(clip);
@@ -109,13 +115,13 @@ public class VideoPlayerActivity extends AppCompatActivity {
             String info = String.format("Duration: %s seconds\nBitrate: %s bps\nFormat: %s", duration, bitrate, formatName);
 
             // Display the info in a Toast or a custom dialog
-            dialog.setPositiveButton("COPY", (dialogInterface, i) -> {
+            dialog.setPositiveButton(getResources().getString(android.R.string.copy), (dialogInterface, i) -> {
                 ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                 ClipData clip = ClipData.newPlainText("FFprobe Output", info);
                 clipboard.setPrimaryClip(clip);
             }).setMessage(info);
         } catch (Exception e) {
-            dialog.setPositiveButton("COPY", (dialogInterface, i) -> {
+            dialog.setPositiveButton(getResources().getString(android.R.string.copy), (dialogInterface, i) -> {
                 ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
                 ClipData clip = ClipData.newPlainText("FFprobe Output", e.getMessage());
                 clipboard.setPrimaryClip(clip);

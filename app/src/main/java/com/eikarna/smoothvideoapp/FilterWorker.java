@@ -17,6 +17,7 @@ import java.util.Objects;
 
 public class FilterWorker extends Worker {
     private static final String TAG = "FilterWorker";
+    private FFmpegSession session;
 
     public FilterWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
@@ -58,7 +59,7 @@ public class FilterWorker extends Worker {
                 .append(inputFilePath)
                 .append(" -preset ").append(preset)
                 .append(" -filter:v \"minterpolate='mi_mode=").append(miMode);
-        if (Objects.equals(meMode, "mci")) {
+        if (Objects.equals(miMode, "mci")) {
             ffmpegCommand.append(":mc_mode=").append(mcMode)
                     .append(":me=").append(me)
                     .append(":me_mode=").append(meMode)
@@ -84,7 +85,7 @@ public class FilterWorker extends Worker {
         });
 
         // Execute the FFmpeg command
-        FFmpegSession session = FFmpegKit.execute(ffmpegCommand.toString());
+        session = FFmpegKit.execute(ffmpegCommand.toString());
         Log.d(TAG, "FFmpeg output: " + session.getOutput());
         Log.e(TAG, "FFmpeg error: " + session.getFailStackTrace());
 
@@ -95,6 +96,14 @@ public class FilterWorker extends Worker {
         } else {
             Log.e(TAG, "FFmpeg process failed");
             return Result.failure();
+        }
+    }
+  
+    @Override
+    public void onStopped() {
+        super.onStopped();
+        if (session != null) {
+            session.cancel();  // Stop FFmpeg session gracefully
         }
     }
 
